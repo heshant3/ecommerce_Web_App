@@ -1,0 +1,25 @@
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  width: 179px;
+}
+
+.categoryImage {
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  width: 179px;
+  height: 179px;
+}
+
+.categoryTitle {
+  align-self: center;
+  margin-top: 15px;
+  font: 600 27px Inter, sans-serif;
+  color: #000;
+}
+
+@media (max-width: 991px) {
+  .categoryItem {
+    white-space: initial;
+  }
+}

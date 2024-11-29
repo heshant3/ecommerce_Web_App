@@ -1,0 +1,89 @@
+.footer {
+  background-color: #2d2c2c;
+  min-height: 496px;
+  width: 100%;
+  padding: 41px 47px 201px;
+  position: relative;
+}
+
+.footerContent {
+  display: flex;
+  gap: 84px;
+  flex-wrap: wrap;
+}
+
+.brandSection {
+  flex: 1;
+  min-width: 240px;
+  max-width: 427px;
+}
+
+.brandName {
+  color: #fff;
+  font: 700 59px Inter, sans-serif;
+}
+
+.brandDescription {
+  color: #96a3ab;
+  font: 400 17px Inter, sans-serif;
+  margin-top: 33px;
+}
+
+.footerNav {
+  display: flex;
+  gap: 84px;
+  flex-wrap: wrap;
+}
+
+.navColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 115px;
+}
+
+.columnTitle {
+  color: #fff;
+  font: 600 27px Inter, sans-serif;
+  margin-bottom: 40px;
+}
+
+.navLink {
+  color: #96a3ab;
+  font: 400 27px Inter, sans-serif;
+  text-decoration: none;
+  margin-top: 16px;
+}
+
+.copyright {
+  color: #fff;
+  font: 500 27px Inter, sans-serif;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 76px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 53px;
+  margin-top: 40px;
+}
+
+.socialIcon {
+  aspect-ratio: 1;
+  width: 25px;
+}
+
+@media (max-width: 991px) {
+  .footer {
+    padding: 20px 20px 100px;
+  }
+
+  .brandName {
+    font-size: 40px;
+  }
+
+  .footerContent {
+    gap: 40px;
+  }
+}
