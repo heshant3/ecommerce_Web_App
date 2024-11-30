@@ -1,63 +1,102 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import { ProductCard } from "./components/ProductCard";
 import { CategoryItem } from "./components/CategoryItem";
 import { Footer } from "./components/Footer";
 import { CiShoppingCart, CiSearch } from "react-icons/ci";
-
 import { FaTshirt, FaShirtsinbulk } from "react-icons/fa";
 import { GiShorts, GiTrousers } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
-
 import slide1 from "./components/image/banner-1.png";
 import slide2 from "./components/image/banner-2.png";
-import footerBanner from './components/image/FooterBanner.png';
+import footerBanner from "./components/image/FooterBanner.png";
+import jeansCollectionImage from "./components/image/Product-1.png";
+import PopupCard from "./components/PopupCard";
 
 
 const sliderImages = [slide1, slide2];
 
 const products = [
   {
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/8856d86241a2f4c5a83cd15cc6cc64123056b57da80d1a4b4bcfe52321dd9b25?apiKey=2570cc01a2d54370b17b865e3b47fdd6&",
-    rating: 4,
+    id: 1,
+    imageUrl: jeansCollectionImage,
+    rating: 3,
     title: "UrbanEdge Men's Jeans Collection",
     price: "RS: 2500.00",
+    category: "Jeans",
   },
   {
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/7a035c920079424e47fc5e8c1358d871a8189258e237fc72cb8434ee68b8b26e?apiKey=2570cc01a2d54370b17b865e3b47fdd6&",
+    id: 2,
+    imageUrl: jeansCollectionImage,
     rating: 4,
     title: "UrbanEdge Men's Jeans Collection",
     price: "RS: 2500.00",
+    category: "Jeans",
   },
   {
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/2df9f3ed35b6d4bc052ce4af3f63b4aa9a3bcf1fd44f95c01e1edf83f68f7799?apiKey=2570cc01a2d54370b17b865e3b47fdd6&",
+    id: 3,
+    imageUrl: jeansCollectionImage,
     rating: 4,
     title: "UrbanEdge Men's Jeans Collection",
     price: "RS: 2500.00",
+    category: "Jeans",
   },
   {
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/3887035e1fa5fb9fb92141359a0fc0edabde161459140b5dafd143597e7eef4b?apiKey=2570cc01a2d54370b17b865e3b47fdd6&",
+    id: 4,
+    imageUrl: jeansCollectionImage,
     rating: 4,
-    title: "UrbanEdge Men's Jeans Collection",
-    price: "RS: 2500.00",
+    title: "Men's Casual T-Shirt",
+    price: "RS: 1500.00",
+    category: "T-Shirt",
   },
   {
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/5eabdd60b44784ed508745099419cd552fd84313200bb2fc6036a1597578f69f?apiKey=2570cc01a2d54370b17b865e3b47fdd6&",
+    id: 5,
+    imageUrl: jeansCollectionImage,
     rating: 4,
-    title: "UrbanEdge Men's Jeans Collection",
-    price: "RS: 2500.00",
+    title: "Men's Formal Shirt",
+    price: "RS: 2000.00",
+    category: "Shirt",
   },
   {
-    imageUrl:
-      "https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/0f257d289ec1c3cf3e71bf344c469bc32d20b58cb50c99f0c5bbe0cc52b9f9e5?apiKey=2570cc01a2d54370b17b865e3b47fdd6&",
+    id: 6,
+    imageUrl: jeansCollectionImage,
+    rating: 5,
+    title: "Summer Men's Shorts",
+    price: "RS: 1200.00",
+    category: "Short",
+  },
+  {
+    id: 7,
+    imageUrl: jeansCollectionImage,
+    rating: 5,
+    title: "Summer Men's Shorts",
+    price: "RS: 1200.00",
+    category: "Short",
+  },
+  {
+    id: 8,
+    imageUrl: jeansCollectionImage,
+    rating: 5,
+    title: "Summer Men's Shorts",
+    price: "RS: 1200.00",
+    category: "Short",
+  },
+  {
+    id: 9,
+    imageUrl: jeansCollectionImage,
     rating: 4,
-    title: "UrbanEdge Men's Jeans Collection",
-    price: "RS: 2500.00",
+    title: "Men's Casual T-Shirt",
+    price: "RS: 1500.00",
+    category: "T-Shirt",
+  },
+  {
+    id: 10,
+    imageUrl: jeansCollectionImage,
+    rating: 4,
+    title: "Men's Formal Shirt",
+    price: "RS: 2000.00",
+    category: "Shirt",
   },
 ];
 
@@ -70,7 +109,74 @@ const categories = [
 ];
 
 export const HomePage = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const navigate = useNavigate();
+  
+  // Handler to open popup and set product data
+  const handleProductClick = (product) => {
+    setSelectedProduct(product); 
+    setIsOpen(true); 
+  };
+
+  const handleCartClick = () => {
+    navigate("/cart"); // Navigates to the /cart page
+  };
+  
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]); 
+  const [showSuggestions, setShowSuggestions] = useState(false); 
+  const [displayedProducts, setDisplayedProducts] = useState(8); 
+  const [allProductsLoaded, setAllProductsLoaded] = useState(false); 
+
+  // Filter products based on selected category and search query
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory =
+      selectedCategory === "All" || product.category === selectedCategory;
+    const matchesSearchQuery = product.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearchQuery;
+  });
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    // Show suggestions only if there is a search query
+    if (query.length > 0) {
+      setShowSuggestions(true);
+
+      // Filter the product titles based on the search query
+      const suggestions = products
+        .filter((product) =>
+          product.title.toLowerCase().includes(query.toLowerCase())
+        )
+        .map((product) => product.title);
+
+      setFilteredSuggestions(suggestions);
+    } else {
+      setShowSuggestions(false);
+      setFilteredSuggestions([]);
+    }
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion);
+    setShowSuggestions(false); // Hide suggestions after selection
+  };
+
+  const handleShowAllClick = () => {
+    if (displayedProducts < filteredProducts.length) {
+      setDisplayedProducts(filteredProducts.length);
+      setAllProductsLoaded(true);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,14 +199,29 @@ export const HomePage = () => {
               type="search"
               className={styles.searchInput}
               placeholder="Search Product or Brand here ...."
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
+            {showSuggestions && searchQuery && (
+              <ul className={styles.suggestionsDropdown}>
+                {filteredSuggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    className={styles.suggestionItem}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </form>
         <div className={styles.authButtons}>
           <button className={styles.authButton}>Sign Up</button>
           <button className={styles.authButton}>Login</button>
         </div>
-        <CiShoppingCart size={20} color="#43555e" />
+        <CiShoppingCart size={20} color="#43555e" onClick={handleCartClick}/>
       </header>
 
       <div className={styles.heroBanner} role="banner">
@@ -138,23 +259,42 @@ export const HomePage = () => {
             key={index}
             title={category.title}
             icon={category.icon}
+            onClick={() => setSelectedCategory(category.title)}
           />
         ))}
       </section>
+      <PopupCard
+  isOpen={isOpen}
+  product={selectedProduct}
+  onClose={() => setIsOpen(false)}
+/>
 
-      <h1 className={styles.sectionTitle}>Today For You!</h1>
 
-      <section className={styles.productGrid} aria-label="Featured Products">
-        {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+      <h1 className={styles.sectionTitle}>
+        {selectedCategory === "All" ? "Today For You!" : selectedCategory}
+      </h1>
+
+
+
+      <section
+        onClick={() => setIsOpen(true)}
+        className={styles.productGrid}
+        aria-label="Featured Products"
+      >
+        {filteredProducts.slice(0, displayedProducts).map((product) => (
+          <ProductCard key={product.id} {...product}  onClick={() => handleProductClick(product)}/>
         ))}
       </section>
 
-      <button className={styles.seeAllButton}>See All</button>
+      {filteredProducts.length > displayedProducts && (
+        <button className={styles.seeAllButton} onClick={handleShowAllClick}>
+          {allProductsLoaded ? "No More Products" : "Show All"}
+        </button>
+      )}
 
       <div className={styles.promotionBanner} role="banner">
-  <img src={footerBanner} alt="Promotion Banner" />
-</div>
+        <img src={footerBanner} alt="Promotion Banner" />
+      </div>
 
       <Footer />
     </div>

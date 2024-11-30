@@ -2,7 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+  padding: 12px;
+  transition: background-color 0.3s ease;
 }
+
+
 
 .categoryIcon {
   width: 5rem;
@@ -13,10 +18,19 @@
   border-radius: 50%;
   background-color: #f0f0f0;
   color: #43555e;
-  /* margin-bottom: 0.5rem; */
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   font-size: 1.5rem;
 }
+
+.categoryIcon:hover {
+  background-color: #929292;
+  color: white;
+}
+
+.categoryIcon.active {
+  background-color: black;  
+  color: white;  
+}
+
 
 .categoryImage {
   background-color: #d9d9d9;

@@ -136,11 +136,12 @@
 }
 
 .productGrid {
+  padding: 0 2rem 0 2rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 6rem;
+  gap: 3rem;
   justify-content: center;
-  margin-top: 134px;
+  margin-top: 4rem;
 }
 
 .seeAllButton {
@@ -160,20 +161,41 @@
   position: relative;
   width: 100%;
   height: auto;
-  max-width: 1440px; 
-  margin: 10rem 0 0 0 ;
-  overflow: hidden; 
+  max-width: 1440px;
+  margin: 10rem 0 0 0;
+  overflow: hidden;
 }
 
 /* Image styling */
 .promotionBanner img {
   width: 100%;
   height: auto;
-  object-fit: cover; 
-  display: block; 
-  max-height: 500px; 
+  object-fit: cover;
+  display: block;
+  max-height: 500px;
 }
 
+.suggestionsDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.suggestionItem {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
+}
 
 .promotionBanner img {
   opacity: 0;
