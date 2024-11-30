@@ -1,50 +1,50 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Cart.module.css";
-import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Mid grey shark skin suit",
-      price: 1000.0,
-      size: "M",
-      color: "Gray",
-      quantity: 3,
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      name: "jrfrfergrgrthtyhtyjuju",
-      price: 1030.0,
-      size: "M",
-      color: "Gray",
-      quantity: 2,
-      image: "https://via.placeholder.com/150",
-    },
-  ]);
+  const location = useLocation();
+  const initialCartItems = location.state?.cartItems || []; // Retrieve cart items from location state
+
+  // Manage cart items in local state
+  const [cartItems, setCartItems] = useState(initialCartItems);
 
   const handleQuantityChange = (id, operation) => {
-    const updatedItems = items.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          quantity:
+    const updatedItems = cartItems
+      .map((item) => {
+        if (item.id === id) {
+          const newQuantity =
             operation === "increase"
               ? item.quantity + 1
-              : item.quantity > 1
-              ? item.quantity - 1
-              : item.quantity,
-        };
-      }
-      return item;
-    });
-    setItems(updatedItems);
+              : item.quantity - 1;
+  
+          // Only include the item if the quantity is greater than 0
+          return newQuantity > 0
+            ? { ...item, quantity: newQuantity }
+            : null; // Mark for removal if quantity becomes 0
+        }
+        return item;
+      })
+      .filter(Boolean); // Remove null items from the list
+  
+    setCartItems(updatedItems);
   };
 
-  const subtotal = items.reduce(
+  if (!cartItems || cartItems.length === 0) {
+    return (
+      <div className={styles.cart}>
+        <h1 className={styles.title}>Shopping Bag</h1>
+        <div className={styles.backButton} onClick={() => navigate(-1)}>
+          <IoIosArrowBack size={30} color="#000" />
+        </div>
+        <p>Your cart is empty!</p>
+      </div>
+    );
+  }
+
+  const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -61,7 +61,7 @@ const Cart = () => {
 
       <div className={styles.cartContent}>
         <div className={styles.cartItems}>
-          {items.map((item) => (
+          {cartItems.map((item) => (
             <div key={item.id} className={styles.cartItem}>
               <img src={item.image} alt={item.name} />
               <div className={styles.itemDetails}>

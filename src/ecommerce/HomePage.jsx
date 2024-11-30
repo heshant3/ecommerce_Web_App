@@ -38,9 +38,9 @@ const products = [
     id: 3,
     imageUrl: jeansCollectionImage,
     rating: 4,
-    title: "UrbanEdge Men's Jeans Collection",
-    price: "RS: 2500.00",
-    category: "Jeans",
+    title: "deded",
+    price: "RS: 500.00",
+    category: "pants",
   },
   {
     id: 4,
@@ -109,11 +109,41 @@ const categories = [
 ];
 
 export const HomePage = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]); // Store cart items in state
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
   
+ // Function to handle adding item to the cart
+ const addToCart = (product, quantity, size) => {
+  const newItem = {
+    id: product.id,
+    name: product.title,
+    price: parseFloat(product.price.replace("RS:", "").trim()), // Parse price
+    quantity: quantity,
+    size: size,
+    image: product.imageUrl,
+  };
+
+  setCartItems((prevItems) => {
+    const existingItemIndex = prevItems.findIndex(
+      (item) => item.id === product.id && item.size === size
+    );
+
+    if (existingItemIndex !== -1) {
+      // Update quantity if item already exists
+      const updatedItems = [...prevItems];
+      updatedItems[existingItemIndex].quantity += quantity;
+      return updatedItems;
+    } else {
+      // Add new item
+      return [...prevItems, newItem];
+    }
+  });
+
+  setIsOpen(false); // Close the popup after adding to cart
+};
+
   // Handler to open popup and set product data
   const handleProductClick = (product) => {
     setSelectedProduct(product); 
@@ -121,7 +151,7 @@ export const HomePage = () => {
   };
 
   const handleCartClick = () => {
-    navigate("/cart"); // Navigates to the /cart page
+    navigate("/cart", { state: { cartItems } }); // Pass cartItems to Cart page using React Router state
   };
   
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -267,6 +297,7 @@ export const HomePage = () => {
   isOpen={isOpen}
   product={selectedProduct}
   onClose={() => setIsOpen(false)}
+  onAddToCart={addToCart}
 />
 
 

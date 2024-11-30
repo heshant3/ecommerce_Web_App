@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PopupCard.css";
 
-const PopupCard = ({ isOpen, product, onClose }) => {
+const PopupCard = ({ isOpen, product, onClose, onAddToCart }) => {
   const [selectedSize, setSelectedSize] = useState("S"); // Default selected size
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
 
@@ -13,6 +13,11 @@ const PopupCard = ({ isOpen, product, onClose }) => {
   const increaseQuantity = () => setQuantity(quantity + 1); // Increase quantity
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1); // Decrease quantity, but not below 1
+  };
+
+
+  const handleAddToCart = () => {
+    onAddToCart(product, quantity, selectedSize); // Pass all product details to addToCart
   };
 
   return (
@@ -51,7 +56,7 @@ const PopupCard = ({ isOpen, product, onClose }) => {
                 +
               </button>
             </div>
-            <button className="add-to-cart-button">Add to Cart</button>
+            <button onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
 
             <span className="Bottom-Text">See full details</span>
           </div>
