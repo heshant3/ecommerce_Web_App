@@ -1,8 +1,8 @@
 .footer {
   background-color: #2d2c2c;
-  min-height: 496px;
+  min-height: 14rem;
   width: 100%;
-  padding: 41px 47px 201px;
+  padding: 2rem 2rem 0;
   position: relative;
 }
 
@@ -20,13 +20,13 @@
 
 .brandName {
   color: #fff;
-  font: 700 59px Inter, sans-serif;
+  font: 700 3em Inter, sans-serif;
 }
 
 .brandDescription {
   color: #96a3ab;
-  font: 400 17px Inter, sans-serif;
-  margin-top: 33px;
+  font: 400 1em Inter, sans-serif;
+  margin-top: 1rem;
 }
 
 .footerNav {
@@ -43,30 +43,29 @@
 
 .columnTitle {
   color: #fff;
-  font: 600 27px Inter, sans-serif;
-  margin-bottom: 40px;
+  font: 600 1em Inter, sans-serif;
 }
 
 .navLink {
   color: #96a3ab;
-  font: 400 27px Inter, sans-serif;
+  font: 400 1em Inter, sans-serif;
   text-decoration: none;
-  margin-top: 16px;
+  margin-top: 0.5rem;
 }
 
 .copyright {
   color: #fff;
-  font: 500 27px Inter, sans-serif;
+  font: 500 0.6em Inter, sans-serif;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 76px;
+  bottom: 1rem;
 }
 
 .socialIcons {
   display: flex;
   gap: 53px;
-  margin-top: 40px;
+  margin-top: 1rem;
 }
 
 .socialIcon {

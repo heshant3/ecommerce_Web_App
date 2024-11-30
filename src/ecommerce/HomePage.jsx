@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./HomePage.module.css";
 import { ProductCard } from "./components/ProductCard";
 import { CategoryItem } from "./components/CategoryItem";
 import { Footer } from "./components/Footer";
+import { CiShoppingCart, CiSearch } from "react-icons/ci";
+
+import { FaTshirt, FaShirtsinbulk } from "react-icons/fa";
+import { GiShorts, GiTrousers } from "react-icons/gi";
+import { MdOutlineCategory } from "react-icons/md";
+
+import slide1 from "./components/image/banner-1.png";
+import slide2 from "./components/image/banner-2.png";
+import footerBanner from './components/image/FooterBanner.png';
+
+
+const sliderImages = [slide1, slide2];
 
 const products = [
   {
@@ -49,9 +61,24 @@ const products = [
   },
 ];
 
-const categories = ["T-Shirt", "T-Shirt", "T-Shirt", "T-Shirt", "T-Shirt"];
+const categories = [
+  { title: "T-Shirt", icon: <FaTshirt /> },
+  { title: "Shirt", icon: <FaShirtsinbulk /> },
+  { title: "Short", icon: <GiShorts /> },
+  { title: "Pants", icon: <GiTrousers /> },
+  { title: "All", icon: <MdOutlineCategory /> },
+];
 
 export const HomePage = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderImages.length);
+    }, 10000); // 10 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={styles.home}>
       <header className={styles.header}>
@@ -59,30 +86,59 @@ export const HomePage = () => {
           <label htmlFor="searchInput" className={styles.visuallyHidden}>
             Search Product or Brand
           </label>
-          <input
-            id="searchInput"
-            type="search"
-            className={styles.searchInput}
-            placeholder="Search Product or Brand here ...."
-          />
+          <div className={styles.searchInputContainer}>
+            <CiSearch className={styles.searchIcon} size={20} />
+            <input
+              id="searchInput"
+              type="search"
+              className={styles.searchInput}
+              placeholder="Search Product or Brand here ...."
+            />
+          </div>
         </form>
         <div className={styles.authButtons}>
           <button className={styles.authButton}>Sign Up</button>
           <button className={styles.authButton}>Login</button>
         </div>
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/2570cc01a2d54370b17b865e3b47fdd6/433beefcd8b58388812f0fb902ee7e483afabb6201fb215f0edc32bd3714cc04?apiKey=2570cc01a2d54370b17b865e3b47fdd6&"
-          alt="Cart"
-          className={styles.cartIcon}
-        />
+        <CiShoppingCart size={20} color="#43555e" />
       </header>
 
-      <div className={styles.heroBanner} role="banner" />
+      <div className={styles.heroBanner} role="banner">
+        <div
+          className={styles.slider}
+          style={{
+            transform: `translateX(-${currentSlide * 100}%)`,
+          }}
+        >
+          {sliderImages.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Slide ${index + 1}`}
+              className={styles.slideImage}
+            />
+          ))}
+        </div>
+        <div className={styles.dots}>
+          {sliderImages.map((_, index) => (
+            <span
+              key={index}
+              className={`${styles.dot} ${
+                currentSlide === index ? styles.activeDot : ""
+              }`}
+              onClick={() => setCurrentSlide(index)}
+            ></span>
+          ))}
+        </div>
+      </div>
 
       <section className={styles.categories} aria-label="Product Categories">
         {categories.map((category, index) => (
-          <CategoryItem key={index} title={category} />
+          <CategoryItem
+            key={index}
+            title={category.title}
+            icon={category.icon}
+          />
         ))}
       </section>
 
@@ -96,7 +152,9 @@ export const HomePage = () => {
 
       <button className={styles.seeAllButton}>See All</button>
 
-      <div className={styles.promotionBanner} role="banner" />
+      <div className={styles.promotionBanner} role="banner">
+  <img src={footerBanner} alt="Promotion Banner" />
+</div>
 
       <Footer />
     </div>
