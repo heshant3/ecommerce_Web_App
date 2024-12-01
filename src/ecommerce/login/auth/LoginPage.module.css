@@ -1,0 +1,62 @@
+
+body, html {
+  height: 100%; 
+  margin: 0; 
+  background-color: #f4f4f4;
+}
+.loginPage {
+  display: flex;
+  justify-content: center;
+  height: 97vh;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  padding: 10px 0px 0px 0px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.imageColumn {
+  width: 50%;
+}
+
+.illustration {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  margin: auto 0;
+}
+
+.formColumn {
+  width: 40%;
+  margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .loginPage {
+    padding-left: 20px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .imageColumn,
+  .formColumn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .illustration {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}

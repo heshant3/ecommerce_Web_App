@@ -153,6 +153,10 @@ export const HomePage = () => {
   const handleCartClick = () => {
     navigate("/cart", { state: { cartItems } }); // Pass cartItems to Cart page using React Router state
   };
+
+  const handleLoginClick = () => {
+    navigate("/login"); // Navigate to the login page
+  };
   
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -249,7 +253,7 @@ export const HomePage = () => {
   </form>
   <div className={styles.authButtons}>
     <button className={styles.authButton}>Sign Up</button>
-    <button className={styles.authButton}>Login</button>
+    <button className={styles.authButton} onClick={handleLoginClick}>Login</button>
   </div>
   <div className={styles.cartContainer}>
     <CiShoppingCart size={20} color="#43555e" onClick={handleCartClick} />
