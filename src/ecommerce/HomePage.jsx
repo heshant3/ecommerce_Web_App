@@ -217,42 +217,50 @@ export const HomePage = () => {
 
   return (
     <div className={styles.home}>
-      <header className={styles.header}>
-        <form className={styles.searchForm} role="search">
-          <label htmlFor="searchInput" className={styles.visuallyHidden}>
-            Search Product or Brand
-          </label>
-          <div className={styles.searchInputContainer}>
-            <CiSearch className={styles.searchIcon} size={20} />
-            <input
-              id="searchInput"
-              type="search"
-              className={styles.searchInput}
-              placeholder="Search Product or Brand here ...."
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            {showSuggestions && searchQuery && (
-              <ul className={styles.suggestionsDropdown}>
-                {filteredSuggestions.map((suggestion, index) => (
-                  <li
-                    key={index}
-                    className={styles.suggestionItem}
-                    onClick={() => handleSuggestionClick(suggestion)}
-                  >
-                    {suggestion}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </form>
-        <div className={styles.authButtons}>
-          <button className={styles.authButton}>Sign Up</button>
-          <button className={styles.authButton}>Login</button>
-        </div>
-        <CiShoppingCart size={20} color="#43555e" onClick={handleCartClick}/>
-      </header>
+<header className={styles.header}>
+  <form className={styles.searchForm} role="search">
+    <label htmlFor="searchInput" className={styles.visuallyHidden}>
+      Search Product or Brand
+    </label>
+    <div className={styles.searchInputContainer}>
+      <CiSearch className={styles.searchIcon} size={20} />
+      <input
+        id="searchInput"
+        type="search"
+        className={styles.searchInput}
+        placeholder="Search Product or Brand here ...."
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
+      {showSuggestions && searchQuery && (
+        <ul className={styles.suggestionsDropdown}>
+          {filteredSuggestions.map((suggestion, index) => (
+            <li
+              key={index}
+              className={styles.suggestionItem}
+              onClick={() => handleSuggestionClick(suggestion)}
+            >
+              {suggestion}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </form>
+  <div className={styles.authButtons}>
+    <button className={styles.authButton}>Sign Up</button>
+    <button className={styles.authButton}>Login</button>
+  </div>
+  <div className={styles.cartContainer}>
+    <CiShoppingCart size={20} color="#43555e" onClick={handleCartClick} />
+    {cartItems.length > 0 && (
+      <span className={styles.cartCount}>
+        {cartItems.reduce((total, item) => total + item.quantity, 0)}
+      </span>
+    )}
+  </div>
+</header>
+
 
       <div className={styles.heroBanner} role="banner">
         <div

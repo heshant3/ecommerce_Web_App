@@ -22,6 +22,12 @@
   margin-top: 20px;
 }
 
+.emptyText{
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
 .cartItems {
   width: 65%;
 }

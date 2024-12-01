@@ -39,7 +39,9 @@ const Cart = () => {
         <div className={styles.backButton} onClick={() => navigate(-1)}>
           <IoIosArrowBack size={30} color="#000" />
         </div>
+        <div className={styles.emptyText}>
         <p>Your cart is empty!</p>
+        </div>
       </div>
     );
   }
