@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import { ProductCard } from "./components/ProductCard";
 import { CategoryItem } from "./components/CategoryItem";

@@ -16,19 +16,15 @@ const Cart = () => {
       .map((item) => {
         if (item.id === id) {
           const newQuantity =
-            operation === "increase"
-              ? item.quantity + 1
-              : item.quantity - 1;
-  
+            operation === "increase" ? item.quantity + 1 : item.quantity - 1;
+
           // Only include the item if the quantity is greater than 0
-          return newQuantity > 0
-            ? { ...item, quantity: newQuantity }
-            : null; // Mark for removal if quantity becomes 0
+          return newQuantity > 0 ? { ...item, quantity: newQuantity } : null; // Mark for removal if quantity becomes 0
         }
         return item;
       })
       .filter(Boolean); // Remove null items from the list
-  
+
     setCartItems(updatedItems);
   };
 
@@ -40,7 +36,7 @@ const Cart = () => {
           <IoIosArrowBack size={30} color="#000" />
         </div>
         <div className={styles.emptyText}>
-        <p>Your cart is empty!</p>
+          <p>Your cart is empty!</p>
         </div>
       </div>
     );
