@@ -75,14 +75,46 @@
 
 @media (max-width: 991px) {
   .footer {
-    padding: 20px 20px 100px;
+    padding: 0rem;
   }
 
   .brandName {
-    font-size: 40px;
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 1.6em;
+  }
+
+  .brandDescription {
+    padding: 0.7rem;
+    margin-top: 0rem;
+    font-size: 0.8em;
   }
 
   .footerContent {
-    gap: 40px;
+    gap: 0px;
+  }
+
+  .footerNav {
+    padding: 1rem;
+    gap: 1px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .columnTitle {
+    font-size: 0.7em;
+  }
+
+  .navLink {
+    font-size: 0.7em;
+  }
+
+  .navColumn {
+    min-width: 100px;
+  }
+
+  .socialIcons {
+    display: none;
   }
 }

@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./PopupCard.css";
 
 const PopupCard = ({ isOpen, product, onClose, onAddToCart }) => {
-  const [selectedSize, setSelectedSize] = useState("S"); // Default selected size
-  const [quantity, setQuantity] = useState(1); // Default quantity is 1
+  const [selectedSize, setSelectedSize] = useState("S");
+  const [quantity, setQuantity] = useState(1);
 
-  if (!isOpen || !product) return null; // Don't render if popup is closed or no product is selected
+  useEffect(() => {
+    if (isOpen) {
+      setQuantity(1); // Reset quantity to 1 when the popup is opened
+    }
+  }, [isOpen]); // Dependency on 'isOpen' to trigger the effect when the popup opens
+
+  if (!isOpen || !product) return null;
 
   const { imageUrl, title, price } = product;
 
   // Function to handle quantity change
-  const increaseQuantity = () => setQuantity(quantity + 1); // Increase quantity
+  const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1); // Decrease quantity, but not below 1
   };
-
 
   const handleAddToCart = () => {
     onAddToCart(product, quantity, selectedSize); // Pass all product details to addToCart
@@ -56,7 +61,9 @@ const PopupCard = ({ isOpen, product, onClose, onAddToCart }) => {
                 +
               </button>
             </div>
-            <button onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
+            <button onClick={handleAddToCart} className="add-to-cart-button">
+              Add to Cart
+            </button>
 
             <span className="Bottom-Text">See full details</span>
           </div>

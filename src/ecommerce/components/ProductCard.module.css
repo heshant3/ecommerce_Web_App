@@ -88,16 +88,21 @@
   color: #000;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   .productCard {
+    width: 300px;
     max-width: 100%;
   }
 
   .imageContainer {
-    padding: 20px;
+    padding: 0px;
   }
 
   .productInfo {
-    padding: 0 20px;
+    /* padding: 0 20px; */
+  }
+
+  .heartIcon {
+    right: 1rem;
   }
 }

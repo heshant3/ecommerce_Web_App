@@ -7,8 +7,6 @@
   transition: background-color 0.3s ease;
 }
 
-
-
 .categoryIcon {
   width: 5rem;
   height: 5rem;
@@ -27,10 +25,9 @@
 }
 
 .categoryIcon.active {
-  background-color: black;  
-  color: white;  
+  background-color: black;
+  color: white;
 }
-
 
 .categoryImage {
   background-color: #d9d9d9;
@@ -49,5 +46,19 @@
 @media (max-width: 991px) {
   .categoryItem {
     white-space: initial;
+  }
+}
+
+@media (max-width: 768px) {
+  .categoryIcon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .categoryTitle {
+    align-self: center;
+    margin-top: 15px;
+    font: 600 0.6em Inter, sans-serif;
+    color: #000;
   }
 }

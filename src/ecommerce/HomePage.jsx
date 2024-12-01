@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import { ProductCard } from "./components/ProductCard";
 import { CategoryItem } from "./components/CategoryItem";
 import { Footer } from "./components/Footer";
 import { CiShoppingCart, CiSearch } from "react-icons/ci";
-import { FaTshirt, FaShirtsinbulk } from "react-icons/fa";
+import { FaTshirt } from "react-icons/fa";
 import { GiShorts, GiTrousers } from "react-icons/gi";
-import { MdOutlineCategory } from "react-icons/md";
+import { PiShirtFoldedFill } from "react-icons/pi";
+import { BiSolidCategory } from "react-icons/bi";
 import slide1 from "./components/image/banner-1.png";
 import slide2 from "./components/image/banner-2.png";
 import footerBanner from "./components/image/FooterBanner.png";
 import jeansCollectionImage from "./components/image/Product-1.png";
 import PopupCard from "./components/PopupCard";
-
 
 const sliderImages = [slide1, slide2];
 
@@ -102,10 +102,10 @@ const products = [
 
 const categories = [
   { title: "T-Shirt", icon: <FaTshirt /> },
-  { title: "Shirt", icon: <FaShirtsinbulk /> },
+  { title: "Shirt", icon: <PiShirtFoldedFill /> },
   { title: "Short", icon: <GiShorts /> },
   { title: "Pants", icon: <GiTrousers /> },
-  { title: "All", icon: <MdOutlineCategory /> },
+  { title: "All", icon: <BiSolidCategory /> },
 ];
 
 export const HomePage = () => {
@@ -113,41 +113,57 @@ export const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
-  
- // Function to handle adding item to the cart
- const addToCart = (product, quantity, size) => {
-  const newItem = {
-    id: product.id,
-    name: product.title,
-    price: parseFloat(product.price.replace("RS:", "").trim()), // Parse price
-    quantity: quantity,
-    size: size,
-    image: product.imageUrl,
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Create a ref for the menu container
+
+  // Close menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false); // Close the menu
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Function to handle adding item to the cart
+  const addToCart = (product, quantity, size) => {
+    const newItem = {
+      id: product.id,
+      name: product.title,
+      price: parseFloat(product.price.replace("RS:", "").trim()), // Parse price
+      quantity: quantity,
+      size: size,
+      image: product.imageUrl,
+    };
+
+    setCartItems((prevItems) => {
+      const existingItemIndex = prevItems.findIndex(
+        (item) => item.id === product.id && item.size === size
+      );
+
+      if (existingItemIndex !== -1) {
+        // Update quantity if item already exists
+        const updatedItems = [...prevItems];
+        updatedItems[existingItemIndex].quantity += quantity;
+        return updatedItems;
+      } else {
+        // Add new item
+        return [...prevItems, newItem];
+      }
+    });
+
+    setIsOpen(false); // Close the popup after adding to cart
   };
-
-  setCartItems((prevItems) => {
-    const existingItemIndex = prevItems.findIndex(
-      (item) => item.id === product.id && item.size === size
-    );
-
-    if (existingItemIndex !== -1) {
-      // Update quantity if item already exists
-      const updatedItems = [...prevItems];
-      updatedItems[existingItemIndex].quantity += quantity;
-      return updatedItems;
-    } else {
-      // Add new item
-      return [...prevItems, newItem];
-    }
-  });
-
-  setIsOpen(false); // Close the popup after adding to cart
-};
 
   // Handler to open popup and set product data
   const handleProductClick = (product) => {
-    setSelectedProduct(product); 
-    setIsOpen(true); 
+    setSelectedProduct(product);
+    setIsOpen(true);
   };
 
   const handleCartClick = () => {
@@ -157,14 +173,18 @@ export const HomePage = () => {
   const handleLoginClick = () => {
     navigate("/login"); // Navigate to the login page
   };
-  
+
+  const handleLoginClick2 = () => {
+    navigate("/signin"); // Navigate to the Sign In page
+  };
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]); 
-  const [showSuggestions, setShowSuggestions] = useState(false); 
-  const [displayedProducts, setDisplayedProducts] = useState(8); 
-  const [allProductsLoaded, setAllProductsLoaded] = useState(false); 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [displayedProducts, setDisplayedProducts] = useState(8);
+  const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
   // Filter products based on selected category and search query
   const filteredProducts = products.filter((product) => {
@@ -221,50 +241,91 @@ export const HomePage = () => {
 
   return (
     <div className={styles.home}>
-<header className={styles.header}>
-  <form className={styles.searchForm} role="search">
-    <label htmlFor="searchInput" className={styles.visuallyHidden}>
-      Search Product or Brand
-    </label>
-    <div className={styles.searchInputContainer}>
-      <CiSearch className={styles.searchIcon} size={20} />
-      <input
-        id="searchInput"
-        type="search"
-        className={styles.searchInput}
-        placeholder="Search Product or Brand here ...."
-        value={searchQuery}
-        onChange={handleSearchChange}
-      />
-      {showSuggestions && searchQuery && (
-        <ul className={styles.suggestionsDropdown}>
-          {filteredSuggestions.map((suggestion, index) => (
-            <li
-              key={index}
-              className={styles.suggestionItem}
-              onClick={() => handleSuggestionClick(suggestion)}
-            >
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  </form>
-  <div className={styles.authButtons}>
-    <button className={styles.authButton}>Sign Up</button>
-    <button className={styles.authButton} onClick={handleLoginClick}>Login</button>
-  </div>
-  <div className={styles.cartContainer}>
-    <CiShoppingCart size={20} color="#43555e" onClick={handleCartClick} />
-    {cartItems.length > 0 && (
-      <span className={styles.cartCount}>
-        {cartItems.reduce((total, item) => total + item.quantity, 0)}
-      </span>
-    )}
-  </div>
-</header>
+      <header className={styles.header}>
+        {/* Hamburger Menu Icon */}
+        <div
+          className={styles.hamburgerMenu}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span className={styles.bar}></span>
+          <span className={styles.bar}></span>
+          <span className={styles.bar}></span>
+        </div>
 
+        <form className={styles.searchForm} role="search">
+          <label htmlFor="searchInput" className={styles.visuallyHidden}>
+            Search Product or Brand
+          </label>
+          <div className={styles.searchInputContainer}>
+            <CiSearch className={styles.searchIcon} size={20} />
+            <input
+              id="searchInput"
+              type="search"
+              className={styles.searchInput}
+              placeholder="Search Product or Brand here ...."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            {showSuggestions && searchQuery && (
+              <ul className={styles.suggestionsDropdown}>
+                {filteredSuggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    className={styles.suggestionItem}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </form>
+
+        <div
+          className={`${styles.authButtons} ${isMenuOpen ? styles.show : ""}`}
+        >
+          <button className={styles.authButton} onClick={handleLoginClick2}>
+            Sign Up
+          </button>
+          <button className={styles.authButton} onClick={handleLoginClick}>
+            Login
+          </button>
+        </div>
+
+        <div
+          className={`${styles.cartContainer} ${isMenuOpen ? styles.show : ""}`}
+        >
+          <CiShoppingCart size={20} color="#43555e" onClick={handleCartClick} />
+          {cartItems.length > 0 && (
+            <span className={styles.cartCount}>
+              {cartItems.reduce((total, item) => total + item.quantity, 0)}
+            </span>
+          )}
+        </div>
+      </header>
+
+      {/* Menu Items */}
+      {isMenuOpen && (
+        <div ref={menuRef} className={styles.mobileMenu}>
+          <form className={styles.searchForm} role="search">
+            <input
+              type="search"
+              className={styles.searchInput}
+              placeholder="Search"
+            />
+          </form>
+          <button
+            className={styles.mobileAthButton}
+            onClick={handleLoginClick2}
+          >
+            Sign Up
+          </button>
+          <button className={styles.mobileAthButton} onClick={handleLoginClick}>
+            Login
+          </button>
+        </div>
+      )}
 
       <div className={styles.heroBanner} role="banner">
         <div
@@ -306,18 +367,15 @@ export const HomePage = () => {
         ))}
       </section>
       <PopupCard
-  isOpen={isOpen}
-  product={selectedProduct}
-  onClose={() => setIsOpen(false)}
-  onAddToCart={addToCart}
-/>
-
+        isOpen={isOpen}
+        product={selectedProduct}
+        onClose={() => setIsOpen(false)}
+        onAddToCart={addToCart}
+      />
 
       <h1 className={styles.sectionTitle}>
         {selectedCategory === "All" ? "Today For You!" : selectedCategory}
       </h1>
-
-
 
       <section
         onClick={() => setIsOpen(true)}
@@ -325,7 +383,11 @@ export const HomePage = () => {
         aria-label="Featured Products"
       >
         {filteredProducts.slice(0, displayedProducts).map((product) => (
-          <ProductCard key={product.id} {...product}  onClick={() => handleProductClick(product)}/>
+          <ProductCard
+            key={product.id}
+            {...product}
+            onClick={() => handleProductClick(product)}
+          />
         ))}
       </section>
 

@@ -17,7 +17,7 @@
   background: white;
   border-radius: 10px;
   width: 90%;
-  max-width: 700px; 
+  max-width: 700px;
   padding: 20px;
   position: relative;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -30,24 +30,24 @@
   right: 10px;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 2em;
   cursor: pointer;
 }
 
 /* Popup Content */
 .popup-content {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   gap: 20px;
 }
 
 .popup-image {
-  width: 40%; 
+  width: 40%;
   border-radius: 8px;
 }
 
 .popup-details {
-  flex: 1; 
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -56,7 +56,7 @@
 .popup-details h2 {
   font-size: 20px;
   margin-bottom: 0rem;
-  text-align: left; 
+  text-align: left;
 }
 
 .price {
@@ -79,6 +79,8 @@
   display: flex;
   gap: 8px;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .size-button {
@@ -124,9 +126,9 @@
 .add-to-cart-button {
   width: 100%;
   background: white;
-  color: #5DBAFF;
+  color: #5dbaff;
   padding: 10px;
-  border: 1px solid #5DBAFF;
+  border: 1px solid #5dbaff;
   border-radius: 0.6rem;
   font-size: 16px;
   transition: 0.3s;
@@ -134,12 +136,12 @@
 }
 
 .add-to-cart-button:hover {
-  background: #5DBAFF; 
-  color: white; 
-  border-color: #5DBAFF;
+  background: #5dbaff;
+  color: white;
+  border-color: #5dbaff;
 }
 
-.Bottom-Text{
+.Bottom-Text {
   padding-top: 1rem;
   color: #184b72;
   padding: 10px;
@@ -152,12 +154,16 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .popup-content {
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
   }
 
   .popup-image {
-    width: 100%; 
-    margin-bottom: 20px;
+    width: 90%;
+    margin-bottom: 0;
+    margin-top: 1.5rem;
   }
 
   .popup-details {
