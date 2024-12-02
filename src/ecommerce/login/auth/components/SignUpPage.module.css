@@ -103,7 +103,6 @@
 .checkboxGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
 }
 
 .checkbox {
@@ -120,6 +119,7 @@
   border: none;
   border-radius: 100px;
   cursor: pointer;
+  margin-top: 1.5rem;
 }
 
 .submitButton:hover {
@@ -151,6 +151,40 @@
 
 .googleButton:hover {
   background-color: #f7f7f7;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  color: #000000;
+  padding: 3rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 0.8em;
+  text-align: center;
+  z-index: 1000;
+  align-content: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup animation section */
+.animationSection {
+  margin-bottom: 3rem;
 }
 
 /* Media Queries for responsiveness */
@@ -200,6 +234,12 @@
 
   .subtitle {
     font-size: 0.8rem;
+  }
+
+  .popup {
+    color: #000000;
+    padding: 3rem 2rem;
+    font-size: 0.6em;
   }
 }
 

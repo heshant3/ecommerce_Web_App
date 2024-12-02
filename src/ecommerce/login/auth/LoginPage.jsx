@@ -34,14 +34,17 @@ export const LoginPage = () => {
     navigate("/signin"); // Navigate to the Sign-Up page
   };
 
-  // Hard-coded credentials (for demonstration purposes)
-  const correctEmail = "heshant3@gmail.com";
-  const correctPassword = "123456789";
-
   // Handle form submission
   const handleLoginSubmit = (values) => {
-    // Check if the entered credentials match the hard-coded ones
-    if (values.email === correctEmail && values.password === correctPassword) {
+    // Retrieve user from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    // Check if stored user matches the entered credentials
+    if (
+      storedUser &&
+      values.email === storedUser.email &&
+      values.password === storedUser.password
+    ) {
       // If correct, navigate to home page
       navigate("/");
     } else {

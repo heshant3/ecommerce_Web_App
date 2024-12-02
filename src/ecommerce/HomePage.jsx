@@ -12,8 +12,19 @@ import { BiSolidCategory } from "react-icons/bi";
 import slide1 from "./components/image/banner-1.png";
 import slide2 from "./components/image/banner-2.png";
 import footerBanner from "./components/image/FooterBanner.png";
-import jeansCollectionImage from "./components/image/Product-1.png";
 import PopupCard from "./components/PopupCard";
+
+import jeansCollectionImage from "./components/image/Product-1.png";
+import product_1 from "./components/image/Iteam-1.png";
+import product_2 from "./components/image/Iteam-2.png";
+import product_3 from "./components/image/Iteam-3.png";
+import product_4 from "./components/image/Iteam-4.png";
+import product_5 from "./components/image/Iteam-5.png";
+import product_6 from "./components/image/Iteam-6.png";
+import product_7 from "./components/image/Iteam-7.png";
+import product_8 from "./components/image/Iteam-8.png";
+import product_9 from "./components/image/Iteam-9.png";
+import product_10 from "./components/image/Iteam-10.png";
 
 const sliderImages = [slide1, slide2];
 
@@ -23,37 +34,37 @@ const products = [
     id: 1,
     imageUrl: jeansCollectionImage,
     rating: 3,
-    title: "UrbanEdge Men's Jeans Collection",
-    price: "RS: 2500.00",
-    category: "Jeans",
-  },
-  {
-    id: 2,
-    imageUrl: jeansCollectionImage,
-    rating: 4,
-    title: "UrbanEdge Men's Jeans Collection",
-    price: "RS: 2500.00",
-    category: "Jeans",
-  },
-  {
-    id: 3,
-    imageUrl: jeansCollectionImage,
-    rating: 4,
-    title: "deded",
-    price: "RS: 500.00",
-    category: "pants",
-  },
-  {
-    id: 4,
-    imageUrl: jeansCollectionImage,
-    rating: 4,
-    title: "Men's Casual T-Shirt",
+    title: " Women's Casual T-Shirt",
     price: "RS: 1500.00",
     category: "T-Shirt",
   },
   {
+    id: 2,
+    imageUrl: product_1,
+    rating: 4,
+    title: "Men's Casual T-Shirt",
+    price: "RS: 2500.00",
+    category: "T-Shirt",
+  },
+  {
+    id: 3,
+    imageUrl: product_2,
+    rating: 4,
+    title: "Women's Casual Pants",
+    price: "RS: 2800.00",
+    category: "Pants",
+  },
+  {
+    id: 4,
+    imageUrl: product_3,
+    rating: 4,
+    title: "Men's Formal Shirt",
+    price: "RS: 1500.00",
+    category: "Shirt",
+  },
+  {
     id: 5,
-    imageUrl: jeansCollectionImage,
+    imageUrl: product_4,
     rating: 4,
     title: "Men's Formal Shirt",
     price: "RS: 2000.00",
@@ -61,43 +72,43 @@ const products = [
   },
   {
     id: 6,
-    imageUrl: jeansCollectionImage,
-    rating: 5,
-    title: "Summer Men's Shorts",
-    price: "RS: 1200.00",
-    category: "Short",
+    imageUrl: product_5,
+    rating: 3,
+    title: "Men's Casual Shirt",
+    price: "RS: 1700.00",
+    category: "Shirt",
   },
   {
     id: 7,
-    imageUrl: jeansCollectionImage,
-    rating: 5,
-    title: "Summer Men's Shorts",
-    price: "RS: 1200.00",
-    category: "Short",
+    imageUrl: product_7,
+    rating: 4,
+    title: "Women's Casual pant",
+    price: "RS: 3200.00",
+    category: "Pants",
   },
   {
     id: 8,
-    imageUrl: jeansCollectionImage,
-    rating: 5,
-    title: "Summer Men's Shorts",
+    imageUrl: product_8,
+    rating: 2,
+    title: "Boy's Shorts",
     price: "RS: 1200.00",
     category: "Short",
   },
   {
     id: 9,
-    imageUrl: jeansCollectionImage,
+    imageUrl: product_9,
     rating: 4,
-    title: "Men's Casual T-Shirt",
-    price: "RS: 1500.00",
-    category: "T-Shirt",
+    title: "Men's Summer Short",
+    price: "RS: 1100.00",
+    category: "Short",
   },
   {
     id: 10,
-    imageUrl: jeansCollectionImage,
-    rating: 4,
-    title: "Men's Formal Shirt",
-    price: "RS: 2000.00",
-    category: "Shirt",
+    imageUrl: product_10,
+    rating: 1,
+    title: "Men's Sport Short",
+    price: "RS: 900.00",
+    category: "Short",
   },
 ];
 
