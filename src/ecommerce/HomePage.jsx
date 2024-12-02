@@ -20,7 +20,6 @@ import product_2 from "./components/image/Iteam-2.png";
 import product_3 from "./components/image/Iteam-3.png";
 import product_4 from "./components/image/Iteam-4.png";
 import product_5 from "./components/image/Iteam-5.png";
-import product_6 from "./components/image/Iteam-6.png";
 import product_7 from "./components/image/Iteam-7.png";
 import product_8 from "./components/image/Iteam-8.png";
 import product_9 from "./components/image/Iteam-9.png";
