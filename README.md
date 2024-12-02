@@ -2,7 +2,14 @@
 
 This is a fully functional eCommerce web application built with **React**. It allows users to browse and purchase products online, featuring a responsive design, smooth user experience, and several additional features for a more dynamic shopping experience.
 
-![eCommerce Web App](https://github.com/heshant3/ecommerce_Web_App/blob/c440f0ec399f69561366e9d8eeeb8ca134a986ce/1202%20(1).gif)
+<p align="center">
+  <img src="https://github.com/heshant3/ecommerce_Web_App/raw/main/1202%20(1).gif" alt="eCommerce Web App" style="max-width: 100%;">
+</p>
+<p align="center">
+  <noscript>Image loading...</noscript>
+</p>
+
+
 
 ## Features
 
