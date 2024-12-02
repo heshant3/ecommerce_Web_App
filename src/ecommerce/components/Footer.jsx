@@ -3,9 +3,7 @@ import styles from "./Footer.module.css";
 import { FaFacebookSquare, FaYoutube } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 
-
 export const Footer = () => {
- 
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
@@ -61,16 +59,17 @@ export const Footer = () => {
             </a>
           </div>
           <div className={styles.navColumn}>
-          <div className={styles.socialIcons}>
-          <FaFacebookSquare size={20} color="#fff" />
-          <FaYoutube size={20} color="#fff" />
-          <FiInstagram size={20} color="#fff" />
-      </div>
-      </div>
+            <div className={styles.socialIcons}>
+              <FaFacebookSquare size={20} color="#fff" />
+              <FaYoutube size={20} color="#fff" />
+              <FiInstagram size={20} color="#fff" />
+            </div>
+          </div>
         </nav>
-        <div className={styles.copyright}>C 2024 All Right Reserved</div>
+        <div className={styles.copyright}>
+          © 2024 Heshan. All rights reserved.
+        </div>
       </div>
-     
     </footer>
   );
 };

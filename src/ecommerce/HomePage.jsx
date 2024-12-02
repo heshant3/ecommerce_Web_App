@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import { ProductCard } from "./components/ProductCard";
 import { CategoryItem } from "./components/CategoryItem";
@@ -18,6 +17,7 @@ import PopupCard from "./components/PopupCard";
 
 const sliderImages = [slide1, slide2];
 
+// Product Items Data
 const products = [
   {
     id: 1,
@@ -101,6 +101,7 @@ const products = [
   },
 ];
 
+// Product categories List
 const categories = [
   { title: "T-Shirt", icon: <FaTshirt /> },
   { title: "Shirt", icon: <PiShirtFoldedFill /> },
@@ -115,13 +116,22 @@ export const HomePage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null); // Create a ref for the menu container
+  const menuRef = useRef(null);
+
+  // State to track search suggestions
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [displayedProducts, setDisplayedProducts] = useState(8);
+  const [allProductsLoaded, setAllProductsLoaded] = useState(false);
 
   // Close menu if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false); // Close the menu
+        setIsMenuOpen(false);
       }
     };
 
@@ -136,29 +146,33 @@ export const HomePage = () => {
     const newItem = {
       id: product.id,
       name: product.title,
-      price: parseFloat(product.price.replace("RS:", "").trim()), // Parse price
+      price: parseFloat(product.price.replace("RS:", "").trim()),
       quantity: quantity,
       size: size,
       image: product.imageUrl,
     };
 
-    setCartItems((prevItems) => {
-      const existingItemIndex = prevItems.findIndex(
-        (item) => item.id === product.id && item.size === size
-      );
+    // Retrieve existing cart items from localStorage or initialize as empty array
+    const existingCartItems =
+      JSON.parse(localStorage.getItem("cartItems")) || [];
 
-      if (existingItemIndex !== -1) {
-        // Update quantity if item already exists
-        const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantity += quantity;
-        return updatedItems;
-      } else {
-        // Add new item
-        return [...prevItems, newItem];
-      }
-    });
+    // Check if the item with the same ID and size already exists in the cart
+    const existingIndex = existingCartItems.findIndex(
+      (item) => item.id === product.id && item.size === size
+    );
 
-    setIsOpen(false); // Close the popup after adding to cart
+    // Update the quantity
+    if (existingIndex !== -1) {
+      existingCartItems[existingIndex].quantity += quantity;
+    } else {
+      existingCartItems.push(newItem);
+    }
+
+    // Update the state and localStorage
+    setCartItems(existingCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
+
+    setIsOpen(false);
   };
 
   // Handler to open popup and set product data
@@ -167,25 +181,26 @@ export const HomePage = () => {
     setIsOpen(true);
   };
 
+  // Pass cartItems to Cart page using React Router state
   const handleCartClick = () => {
-    navigate("/cart", { state: { cartItems } }); // Pass cartItems to Cart page using React Router state
+    navigate("/cart", { state: { cartItems } });
   };
 
+  // Navigate to the login page
   const handleLoginClick = () => {
-    navigate("/login"); // Navigate to the login page
+    navigate("/login");
   };
 
+  // Navigate to the Sign In page
   const handleLoginClick2 = () => {
-    navigate("/signin"); // Navigate to the Sign In page
+    navigate("/signin");
   };
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [displayedProducts, setDisplayedProducts] = useState(8);
-  const [allProductsLoaded, setAllProductsLoaded] = useState(false);
+  // Load cart items from localStorage when the component mounts
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(savedCartItems);
+  }, []);
 
   // Filter products based on selected category and search query
   const filteredProducts = products.filter((product) => {
@@ -223,7 +238,7 @@ export const HomePage = () => {
   // Handle suggestion click
   const handleSuggestionClick = (suggestion) => {
     setSearchQuery(suggestion);
-    setShowSuggestions(false); // Hide suggestions after selection
+    setShowSuggestions(false);
   };
 
   const handleShowAllClick = () => {
@@ -233,10 +248,11 @@ export const HomePage = () => {
     }
   };
 
+  // Function to handle pagination
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderImages.length);
-    }, 10000); // 10 seconds
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -252,7 +268,7 @@ export const HomePage = () => {
           <span className={styles.bar}></span>
           <span className={styles.bar}></span>
         </div>
-
+        {/* Navigation Menu */}
         <form className={styles.searchForm} role="search">
           <label htmlFor="searchInput" className={styles.visuallyHidden}>
             Search Product or Brand
@@ -283,6 +299,7 @@ export const HomePage = () => {
           </div>
         </form>
 
+        {/* Auth Buttons */}
         <div
           className={`${styles.authButtons} ${isMenuOpen ? styles.show : ""}`}
         >
@@ -294,6 +311,7 @@ export const HomePage = () => {
           </button>
         </div>
 
+        {/* Cart Icon */}
         <div
           className={`${styles.cartContainer} ${isMenuOpen ? styles.show : ""}`}
         >
@@ -328,6 +346,7 @@ export const HomePage = () => {
         </div>
       )}
 
+      {/* Hero Banner */}
       <div className={styles.heroBanner} role="banner">
         <div
           className={styles.slider}
@@ -357,6 +376,7 @@ export const HomePage = () => {
         </div>
       </div>
 
+      {/* Categories */}
       <section className={styles.categories} aria-label="Product Categories">
         {categories.map((category, index) => (
           <CategoryItem
@@ -367,6 +387,8 @@ export const HomePage = () => {
           />
         ))}
       </section>
+
+      {/* Product Grid */}
       <PopupCard
         isOpen={isOpen}
         product={selectedProduct}
@@ -374,8 +396,9 @@ export const HomePage = () => {
         onAddToCart={addToCart}
       />
 
+      {/* See more button */}
       <h1 className={styles.sectionTitle}>
-        {selectedCategory === "All" ? "Today For You!" : selectedCategory}
+        {selectedCategory === "All" ? "All Items" : selectedCategory}
       </h1>
 
       <section
@@ -398,6 +421,7 @@ export const HomePage = () => {
         </button>
       )}
 
+      {/* Footer */}
       <div className={styles.promotionBanner} role="banner">
         <img src={footerBanner} alt="Promotion Banner" />
       </div>
