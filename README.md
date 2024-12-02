@@ -6,7 +6,7 @@ This is a fully functional eCommerce web application built with **React**. It al
   <img src="https://github.com/heshant3/ecommerce_Web_App/blob/c440f0ec399f69561366e9d8eeeb8ca134a986ce/1202%20(1).gif" alt="eCommerce Web App" style="max-width: 100%;">
 </p>
 <p align="center">
-  <noscript>Image loading...</noscript>
+  <noscript>Image....</noscript>
 </p>
 
 
