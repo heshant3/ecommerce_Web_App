@@ -71,17 +71,15 @@
   position: absolute;
   bottom: 1rem;
   left: 1rem;
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 12px;
   padding: 0.2rem 1rem;
   display: flex;
   align-items: center;
   gap: 4px;
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.605);
-  /* border: 1px solid rgba(255, 255, 255, 0.4);  */
 }
 
 .ratingContainer svg {
@@ -115,10 +113,6 @@
 
   .imageContainer {
     padding: 0px;
-  }
-
-  .productInfo {
-    /* padding: 0 20px; */
   }
 
   .heartIcon {

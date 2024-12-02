@@ -40,7 +40,7 @@ const products = [
   {
     id: 2,
     imageUrl: product_1,
-    rating: 4,
+    rating: 1,
     title: "Men's Casual T-Shirt",
     price: "RS: 2500.00",
     category: "T-Shirt",
