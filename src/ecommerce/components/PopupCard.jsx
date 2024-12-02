@@ -5,11 +5,12 @@ const PopupCard = ({ isOpen, product, onClose, onAddToCart }) => {
   const [selectedSize, setSelectedSize] = useState("S");
   const [quantity, setQuantity] = useState(1);
 
+  // Update selectedSize and quantity when the size buttons are clicked
   useEffect(() => {
     if (isOpen) {
       setQuantity(1); // Reset quantity to 1 when the popup is opened
     }
-  }, [isOpen]); // Dependency on 'isOpen' to trigger the effect when the popup opens
+  }, [isOpen]);
 
   if (!isOpen || !product) return null;
 
@@ -64,7 +65,6 @@ const PopupCard = ({ isOpen, product, onClose, onAddToCart }) => {
             <button onClick={handleAddToCart} className="add-to-cart-button">
               Add to Cart
             </button>
-
             <span className="Bottom-Text">See full details</span>
           </div>
         </div>

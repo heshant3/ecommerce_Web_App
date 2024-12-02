@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import { HomePage } from './ecommerce/HomePage'; 
 import Cart from './ecommerce/components/Cart';
 import { LoginPage } from './ecommerce/login/auth/LoginPage'; 
@@ -7,6 +7,7 @@ import { SignUpPage } from "./ecommerce/login/auth/SignUpPage";
 
 const App = () => {
   return (
+    // Routing configuration using React Router
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />

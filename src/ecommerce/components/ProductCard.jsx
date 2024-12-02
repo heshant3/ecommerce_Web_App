@@ -19,6 +19,7 @@ export const ProductCard = ({ imageUrl, rating, title, price, onClick }) => {
         className={styles.imageContainer}
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
+        {/* Heart Icon (This Part I hide) */}
         {/* <div className={styles.heartIcon} onClick={handleHeartClick}>
           {isFavorited ? (
             <GoHeartFill size={20} color="#EB8883" /> // Filled heart when favorited
@@ -26,6 +27,8 @@ export const ProductCard = ({ imageUrl, rating, title, price, onClick }) => {
             <GoHeart size={20} color="#43555e" /> // Unfilled heart when not favorited
           )}
         </div> */}
+
+        {/* Product Title */}
         <div className={styles.ratingContainer}>
           {Array(5)
             .fill(0)

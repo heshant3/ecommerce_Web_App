@@ -151,7 +151,7 @@
   text-decoration: underline;
 }
 
-/* Responsive Design */
+/* Media Queries for responsiveness */
 @media (max-width: 768px) {
   .popup-content {
     display: flex;

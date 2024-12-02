@@ -73,6 +73,7 @@
   width: 25px;
 }
 
+/* Media Queries for responsiveness */
 @media (max-width: 991px) {
   .footer {
     padding: 0rem;

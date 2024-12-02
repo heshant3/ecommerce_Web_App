@@ -18,15 +18,14 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
+// Login Page Component
 export const LoginPage = () => {
   const [loginError, setLoginError] = useState(null);
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
-    rendererSettings: {
-      // preserveAspectRatio: "xMidYMid slice"
-    },
+    rendererSettings: {},
   };
   const navigate = useNavigate();
 
@@ -77,6 +76,7 @@ export const LoginPage = () => {
         <h1 className={styles.title}>Welcome back!</h1>
         <p className={styles.subtitle}>Please enter your details</p>
 
+        {/* Login Form */}
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}

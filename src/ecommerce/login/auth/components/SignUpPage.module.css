@@ -153,7 +153,8 @@
   background-color: #f7f7f7;
 }
 
-/* Mobile Responsive Styles */
+/* Media Queries for responsiveness */
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;

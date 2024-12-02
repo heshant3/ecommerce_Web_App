@@ -15,6 +15,8 @@ export const Footer = () => {
             Donec nulla, amet, Ut
           </div>
         </div>
+
+        {/*Categories Link*/}
         <nav className={styles.footerNav}>
           <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>Categories</h3>
@@ -31,6 +33,8 @@ export const Footer = () => {
               Bottoms
             </a>
           </div>
+
+          {/*Customer Care Link*/}
           <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>Customer Care</h3>
             <a href="#" className={styles.navLink}>
@@ -46,6 +50,8 @@ export const Footer = () => {
               Return & Exchange
             </a>
           </div>
+
+          {/*Company Link*/}
           <div className={styles.navColumn}>
             <h3 className={styles.columnTitle}>Company</h3>
             <a href="#" className={styles.navLink}>
@@ -58,6 +64,8 @@ export const Footer = () => {
               Term of Conditions
             </a>
           </div>
+
+          {/*socialIcons Link*/}
           <div className={styles.navColumn}>
             <div className={styles.socialIcons}>
               <FaFacebookSquare size={20} color="#fff" />
@@ -66,6 +74,8 @@ export const Footer = () => {
             </div>
           </div>
         </nav>
+
+        {/*Copyright*/}
         <div className={styles.copyright}>
           © 2024 Heshan. All rights reserved.
         </div>

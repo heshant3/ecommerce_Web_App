@@ -218,6 +218,7 @@
   animation: fadeIn 2s forwards;
 }
 
+/* Animation for the fadeIn effect */
 @keyframes fadeIn {
   to {
     opacity: 1;
@@ -241,14 +242,14 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9; /* Light background for the menu */
+  background-color: #f9f9f9;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   padding: 20px;
-  border-top: 2px solid #e0e0e0; /* Add a subtle border for separation */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  border-top: 2px solid #e0e0e0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mobileMenu .searchInput {
@@ -256,9 +257,11 @@
   margin: 15px 0;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: calc(100% - 0px); /* Ensure full width inside the menu */
+  width: calc(100% - 0px);
   font-size: 1rem;
 }
+
+/* Media Queries for responsiveness */
 
 @media (max-width: 768px) {
   .hamburgerMenu {

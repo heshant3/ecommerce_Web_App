@@ -60,11 +60,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.3s ease; /* Smooth scale animation */
+  transition: transform 0.3s ease;
 }
 
 .heartIcon:hover {
-  transform: scale(1.1); /* Slightly enlarge the heart on hover */
+  transform: scale(1.1);
 }
 
 .ratingContainer {
@@ -104,6 +104,8 @@
   font-weight: bold;
   color: #000;
 }
+
+/* Media Queries for responsiveness */
 
 @media (max-width: 768px) {
   .productCard {

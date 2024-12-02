@@ -21,6 +21,7 @@ const validationSchema = Yup.object({
   terms: Yup.bool().oneOf([true], "You must accept the terms and conditions"),
 });
 
+// Sign Up Page component
 export const SignUpPage = () => {
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ export const SignUpPage = () => {
     navigate("/login");
   };
 
+  // Google Sign-In button
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -48,6 +50,7 @@ export const SignUpPage = () => {
         <IoMdClose size={24} />
       </button>
 
+      {/* Left Side Lottie Animation */}
       <div className={styles.imageSection}>
         <Lottie
           options={defaultOptions}
@@ -56,6 +59,8 @@ export const SignUpPage = () => {
           isClickToPauseDisabled={true}
         />
       </div>
+
+      {/* Sign Up Form */}
       <div className={styles.formSection}>
         <h1 className={styles.title}>Create an account</h1>
         <p className={styles.subtitle}>

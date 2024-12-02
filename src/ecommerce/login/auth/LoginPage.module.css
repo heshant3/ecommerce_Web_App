@@ -204,6 +204,8 @@
   }
 }
 
+/* Media Queries for responsiveness */
+
 @media (max-width: 480px) {
   .title {
     font-size: 1.2rem;
